@@ -1,3 +1,9 @@
+button.onclick = () => {
+    let body = document.getElementsByTagName("body")[0]
+    canvas.classList.remove('bg')
+    body.removeChild(button);
+}
+
 function draw() {
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
@@ -5,11 +11,32 @@ function draw() {
     canvas.width = document.body.clientWidth
     canvas.height = document.documentElement.clientHeight
 
+//清空画布
+    clear.onclick = () => {
+        canvas.height = canvas.height;
+        ctx.lineWidth = '10'
+        ctx.lineCap = "round"
+    } 
+
     ctx.strokeStyle = "green"
     ctx.lineWidth = '10'
     ctx.lineCap = "round"
-   
-
+    
+// 画笔颜色
+    ctx.strokeStyle = "black"
+    blue.onclick = () => {
+        ctx.strokeStyle = "blue"
+    }
+    black.onclick = () => {
+        ctx.strokeStyle = "black"
+    } 
+    red.onclick = () => {
+        ctx.strokeStyle = "red"
+    } 
+    green.onclick = () => {
+        ctx.strokeStyle = "green"
+    }    
+//画笔信号 
     let painting = false
     canvas.onmousedown = (e) => {
         painting = true
@@ -32,6 +59,7 @@ function draw() {
             return false;
         }
     }
+  
 // 连线函数封装
     function drawline(x1,y1,x2,y2) {
         ctx.beginPath();
