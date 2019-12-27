@@ -69,6 +69,14 @@ function draw() {
     }
 
     if (is_touch_device()) {
+        let container = document.getElementsByTagName("div")[0]
+        container.className = "container-mobile"
+        icon.className = 'color-mobile'
+        clear.className = 'color-mobile'
+        blue.className = 'color-mobile'
+        green.className = 'color-mobile'
+        red.className = 'color-mobile'
+        black.className = 'color-mobile'
         canvas.ontouchmove = (x) => {
             drawline(last[0], last[1], x.touches[0].clientX, x.touches[0].clientY)
             last = [x.touches[0].clientX, x.touches[0].clientY]

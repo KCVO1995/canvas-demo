@@ -8,7 +8,6 @@ body {
 }
 #canvas {
   display: block;
-  
 }
 .bg{ 
     background-color: rgba(103, 208, 235, 0.7);
@@ -24,17 +23,34 @@ body {
     display: flex;
     justify-content: space-between;
 }
+.container-mobile{
+    width: 100vw;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.color-mobile{
+    height: 50px;
+    width: 50px;
+    border-radius: 15px;
+}
 .color{
     height: 100px;
     width: 100px;
     border-radius: 15px;
 }
+
 #icon{background: url(images/icon.png);background-size:cover;}
 #clear{background: #fff url(images/clear.png);background-size:cover;}
 #blue {background-color: blue;}
 #red {background-color: red;}
 #black {background-color: black;}
-#green {background-color: green;}
+#green {background-color: green;} 
 
 
 
