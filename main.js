@@ -1,15 +1,24 @@
 function draw() {
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
+    let last = []
     canvas.width = document.body.clientWidth
     canvas.height = document.documentElement.clientHeight
 
-    ctx.fillStyle = "black"
-    ctx.strokeStyle = "none"
+    ctx.strokeStyle = "green"
+    ctx.lineWidth = '10'
+    ctx.lineCap = "round"
+   
 
     let painting = false
-    canvas.onmousedown = () => {
+    canvas.onmousedown = (e) => {
         painting = true
+        last = [e.clientX,e.clientY]
+    }
+    canvas.ontouchstart = (x) => {
+        painting = true
+        last = [x.touches[0].clientX, x.touches[0].clientY]
+        
     }
     canvas.onmouseup = () => {
         painting = false
@@ -23,16 +32,19 @@ function draw() {
             return false;
         }
     }
-
+// 连线函数封装
+    function drawline(x1,y1,x2,y2) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+    }
 
     if (is_touch_device()) {
         canvas.ontouchmove = (x) => {
-            console.log(x.touches[0].clientX)
-            console.log(x.touches[0].clientY)
-            ctx.beginPath();
-            ctx.arc(x.touches[0].clientX, x.touches[0].clientY, 10, 0, 2 * Math.PI, true);
-            ctx.fill();
-            ctx.stroke();
+            drawline(last[0], last[1], x.touches[0].clientX, x.touches[0].clientY)
+            last = [x.touches[0].clientX, x.touches[0].clientY]
+            console.log(x)
         }
     }
     else {
@@ -41,15 +53,12 @@ function draw() {
             console.log(e.clientX)
             console.log(e.clientY)
             if (painting === true) {
-
-                ctx.beginPath();
-                ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI, true);
-                ctx.fill();
-                ctx.stroke();
+                drawline(last[0],last[1],e.clientX,e.clientY)
+                last = [e.clientX,e.clientY]
             }
             else {
 
             }
-        }
+        }      
     }
 }
